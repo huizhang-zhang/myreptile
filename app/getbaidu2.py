@@ -58,6 +58,7 @@ class ReptileTest:
                 finally:
                     print()
 
+
 if __name__ == '__main__':
     rt = ReptileTest()
     image_url_list = rt.get_image_url_list()
