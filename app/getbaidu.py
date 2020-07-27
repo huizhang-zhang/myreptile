@@ -20,7 +20,6 @@ class ReptileTest:
         self.url = "http://image.baidu.com/search/index?tn=baiduimage&ct=201326592&lm=-1&cl=2&ie=gb18030&word=%B6%AF%C2%FE%B1%DA%D6%BD&fr=ala&ala=1&pos=0&alatpl=wallpaper&oriquery=%E5%8A%A8%E6%BC%AB%E5%A3%81%E7%BA%B8"
         self.ua = UserAgent()
         self.headers = {
-            "Cookie": "PSTM=1592207600; BIDUPSID=F8664C1881AF7F2A7F91737947F97635; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; BAIDUID=8AB553CA11874217DDC92470819F778B:FG=1; indexPageSugList=%5B%22ni%22%5D; H_PS_PSSID=1443_21121_31253_32046_30824_26350; delPer=0; PSINO=3; BDSFRCVID=X6LsJeCCxG3_b6Jug5l_j8Yqc0CH6AQX2liC3J; H_BDCLCKID_SF=tbkD_C-MfIvhDRTvhCcjh-FSMgTBKI62aKDsKJox-hcqEpO9QTbr-6Kp5fJi0lLL25vfKIJnWIQNVfP4h-rTDUThDNtDt60jfn3tWJTOaj6jDbTnMIT8bKCShUFsXT5r-2Q-5hOy3KOrHCQ_5tthhh4qebrD55OmWncCbxP-anTThpFu-n5jHjJ0ja_j3J; BDRCVFR[dG2JNJb_ajR]=mk3SLVN4HKm; userFrom=ala",
             "User-Agent": self.ua.random,  # 获取随机的User-Agent
         }
 
