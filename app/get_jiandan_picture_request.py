@@ -39,6 +39,9 @@ class Ao3:
             print(picturl_path_list)
             jiandan_url = "http:" + root.xpath('//*[@id="comments"]/div[2]/div/a[1]/@href')[0]
             print("下一页："+jiandan_url)
+            with open('D:\picture\JianDan2\log.txt','a',encoding = 'utf-8') as f:
+                f.write(jiandan_url)
+
         return picturl_path_list
 
     # 根据图片url下载图片到本地
