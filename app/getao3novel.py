@@ -10,12 +10,13 @@ Time: 2018/12/27 14:49
 import requests
 from lxml import etree
 from fake_useragent import UserAgent
-import os
+import time
 
 
 class Ao3:
     def __init__(self):
-        self.url = "https://www.archiveofourown.org/works/search?utf8=%E2%9C%93&work_search%5Bquery%5D="
+        # self.url = "https://www.archiveofourown.org/works/search?utf8=%E2%9C%93&work_search%5Bquery%5D="
+        self.url = "https://www.archiveofourown.org/works/search?page=8&utf8=%E2%9C%93&work_search%5Bquery%5D="
         self.ua = UserAgent()
         self.headers = {
             "User-Agent": self.ua.random,  # 获取随机的User-Agent
@@ -25,7 +26,7 @@ class Ao3:
         # 访问主网页,获取小说地址
         novel_path_map = {}
         home_url = self.url + "大天狗"
-        for page_num in range(2):
+        for page_num in range(21):
             res = requests.get(home_url, headers=self.headers)
             root = etree.HTML(res.text)
             novel_title_list = root.xpath('//*[@class="work index group"]/li/div/h4/a[1]/text()')
@@ -45,13 +46,24 @@ class Ao3:
             res = requests.get(novel_path_map.get(key), headers=self.headers)
             root = etree.HTML(res.text)
             # print(res.text)
-            novel_text_list = root.xpath('//*[@id="chapters"]/div/p/text()')
+            # span_key = root.xpath('//*[@id="chapters"]/div/p/text()')
+
+            # novel_text_list = root.xpath('//*[@id="chapters"]/div/p/span/text()')
+            novel_text_list = root.xpath('//*[@class="userstuff"]/p/span/text()')
+
+            if len(novel_text_list) == 0:
+                # novel_text_list = root.xpath('//*[@id="chapters"]/div/p/text()')
+                novel_text_list = root.xpath('//*[@class="userstuff"]/p/text()')
+
+            if len(novel_text_list) == 0:
+                novel_text_list = root.xpath('//*[@class="userstuff module"]/p/text()')
 
             # 创建文件，写入内容（文件命名不能有 /）
             novel_title = key.replace('/', ' ')
             novel_title = novel_title.replace('|', ' ')
             novel_path = file_path + novel_title + '.txt'
             print(novel_path)
+            time.sleep(0.5)
             try:
                 f = open(novel_path, 'a', encoding = 'utf-8')
                 for novel_text in novel_text_list:
